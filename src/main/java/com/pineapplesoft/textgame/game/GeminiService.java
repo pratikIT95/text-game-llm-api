@@ -23,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+
 public class GeminiService {
     private final WebClient geminiClient;
     private final String LORE = "You are a text adventure game and this is the lore - a murder mystery detective story in early 20th Century, Colonial India. You randomly assign a detective character to the player - Sherlock Holmes with Dr. John Watson, Byomkesh Bakshi with Ajit, Feluda with Topshe (who have accidentally time travelled - this scenario would involve some fish out of the water situations for Topshe), or Hercule Poirot. The assistants to the detectives help the detectives out, with questions and some queries. The story takes place in either of Chennai, Kolkata or Darjeeling, and should imbibe the atmosphere of those places in colonial times. You give the player three choices and you remember each choice. The story has three parts - a beginning, with detailed info about setting, character and the murder, a middle part involving investigation of at least 3 suspects and the ending which involves resolution. The choices will only affect the storytelling, but there is a chance that the user might be wrong with who they are suspecting, which is only revealed at the end.  You are also supposed to end the story within maximum of 20 prompts. The story should not end on a cliffhanger. Your responses should be in pure JSON format with the following fields - storyText, choices (list of 3), isEnding(whether the story has ended), without any markdown tags. If the story ends, then add a The End at in the storyText";
@@ -64,6 +65,8 @@ public class GeminiService {
     }
 
     public StoryResponse initiateConversation(String userId){
+
+        conversationMap.put(userId, GeminiRequest.builder().build());
 
         GeminiRequest requestBody = createSystemInstruction();
 
