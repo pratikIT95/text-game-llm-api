@@ -15,7 +15,7 @@ public class GameWebClientConfiguration {
     @Bean
     public WebClient geminiClient(){
         return WebClient.builder()
-        .baseUrl(String.format(geminiConfig.getUrl(),geminiConfig.getKey()))
+        .baseUrl(String.format(geminiConfig.getUrl()))
         .build();
     }
 }

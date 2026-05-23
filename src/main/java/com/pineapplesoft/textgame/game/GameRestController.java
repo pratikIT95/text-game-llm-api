@@ -19,12 +19,12 @@ public class GameRestController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/start/{userId}")
-    public StoryResponse startGame(@PathVariable String userId) {
+    public StoryResponse startGame(@PathVariable("userId") String userId) {
         return geminiService.initiateConversation(userId);
     }
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/prompt/{userId}")
-    public StoryResponse continueGame(@PathVariable String userId, @RequestBody String prompt) {
+    public StoryResponse continueGame(@PathVariable("userId") String userId, @RequestBody String prompt) {
         return geminiService.getGeneratedText(userId, prompt);
     }
 }
